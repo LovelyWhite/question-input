@@ -14,11 +14,13 @@ import {
   Card,
 } from "antd";
 import { Menu, Dropdown } from "antd";
+
 import { Collapse } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import { MathpixMarkdown, MathpixLoader } from "mathpix-markdown-it";
 import MdEditor from "react-markdown-editor-lite";
 import "react-markdown-editor-lite/lib/index.css";
+const FileSaver = require("file-saver");
 const { Panel } = Collapse;
 const CheckboxGroup = Checkbox.Group;
 const { TextArea } = Input;
@@ -109,6 +111,10 @@ function App() {
         <Button
           onClick={() => {
             console.log(quesList);
+            let blob = new Blob([JSON.stringify(quesList)], {
+              type: "text/plain;charset=utf-8",
+            });
+            FileSaver.saveAs(blob, new Date().getTime() + ".json");
           }}
           type="ghost"
         >
